@@ -479,6 +479,51 @@ footer {
 .modal-actions { display: flex; gap: 1rem; margin-top: 1.5rem; }
 .modal-actions button { flex: 1; }
 
+/* ─── DASHBOARD / ACCOUNT UI (backend integration) ─── */
+.modal-wide { width: min(680px, 92%); max-height: 85vh; overflow-y: auto; }
+.dash-pane-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; }
+.dash-pane h2 { font-family: var(--font-display); font-size: 1.3rem; font-weight: 800; margin-bottom: 1.25rem; }
+.dash-list { display: flex; flex-direction: column; gap: 0.85rem; }
+.dash-item {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1rem 1.1rem;
+  display: flex; flex-direction: column; gap: 0.5rem;
+}
+.dash-item-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.75rem; }
+.dash-item-title { font-weight: 700; font-size: 0.92rem; }
+.dash-item-sub { color: var(--muted); font-size: 0.78rem; margin-top: 0.15rem; }
+.dash-item-actions { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 0.4rem; }
+.dash-item-actions button {
+  padding: 0.4rem 0.9rem; border-radius: 8px; font-size: 0.78rem; font-weight: 600;
+  cursor: pointer; font-family: var(--font-body); border: 1px solid var(--border);
+  background: transparent; color: var(--text); transition: all 0.2s;
+}
+.dash-item-actions .accept-btn { border-color: rgba(67,233,123,0.4); color: #43e97b; }
+.dash-item-actions .accept-btn:hover { background: #43e97b; color: #06210f; }
+.dash-item-actions .reject-btn, .dash-item-actions .cancel-btn { border-color: rgba(255,101,132,0.4); color: #ff6584; }
+.dash-item-actions .reject-btn:hover, .dash-item-actions .cancel-btn:hover { background: #ff6584; color: #fff; }
+.dash-item-actions .primary-btn { border-color: var(--accent); color: #a89cff; }
+.dash-item-actions .primary-btn:hover { background: var(--accent); color: #fff; }
+.status-pill {
+  font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em;
+  padding: 0.25rem 0.6rem; border-radius: 100px; white-space: nowrap;
+}
+.status-pending   { background: rgba(255,209,102,0.15); color: #ffd166; }
+.status-accepted, .status-scheduled, .status-confirmed { background: rgba(79,172,254,0.15); color: #4facfe; }
+.status-rejected, .status-cancelled { background: rgba(255,101,132,0.15); color: #ff6584; }
+.status-completed { background: rgba(67,233,123,0.15); color: #43e97b; }
+.bell-btn { position: relative; }
+.bell-badge {
+  position: absolute; top: -4px; right: -4px; background: #ff6584; color: #fff;
+  font-size: 0.65rem; font-weight: 700; border-radius: 100px; min-width: 16px; height: 16px;
+  display: flex; align-items: center; justify-content: center; padding: 0 4px;
+}
+.notif-item.unread { border-color: rgba(108,99,255,0.4); }
+.star-input { display: flex; gap: 0.4rem; font-size: 1.8rem; cursor: pointer; }
+.star-input span { color: var(--border); transition: color 0.15s; }
+.star-input span.filled { color: #ffd166; }
+.empty-state { color: var(--muted); font-size: 0.85rem; text-align: center; padding: 2rem 0; }
+
 /* ─── TOAST ─── */
 .toast {
   position: fixed; bottom: 2rem; right: 2rem; z-index: 300;
