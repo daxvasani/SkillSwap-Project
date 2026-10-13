@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SkillSwap — Exchange Skills with College Peers</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet"/>
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+  <!--     NAVBAR     -->
+
+  <nav>
+    <div class="nav-logo">SkillSwap</div>
+
+    <ul class="nav-links">
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#skills">Browse Skills</a></li>
+      <li><a href="#testimonials">Stories</a></li>
+    </ul>
+
+    <div class="nav-cta">
+      <button class="btn-ghost" onclick="openModal('login')">Log In</button>
+      <button class="btn-primary" onclick="openModal('signup')">Get Started</button>
+    </div>
+
+    <div class="hamburger" onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#how"          onclick="toggleMobileMenu()">How It Works</a>
+    <a href="#skills"       onclick="toggleMobileMenu()">Browse Skills</a>
+    <a href="#testimonials" onclick="toggleMobileMenu()">Stories</a>
+    <div class="nav-cta">
+      <button class="btn-ghost"    onclick="openModal('login')">Log In</button>
+      <button class="btn-primary"  onclick="openModal('signup')">Get Started</button>
+    </div>
+  </div>
+
+  <!--       HERO       -->
+  <section class="hero">
+    <div class="hero-glow glow-1"></div>
+    <div class="hero-glow glow-2"></div>
+
+    <!-- Left: Copy -->
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span></span> Now Live at 50+ Colleges
+      </div>
+
+      <h1>Exchange Skills,<br/><span class="highlight">Grow Together</span></h1>
+
+      <p class="hero-sub">
+        Connect with peers at your college. Teach what you know.
+        Learn what you don't. No money — just knowledge.
+      </p>
+
+      <div class="hero-actions">
+        <button class="btn-primary btn-large" onclick="openModal('signup')">
+          Start Swapping Free
+        </button>
+        <button class="btn-outline btn-large" onclick="scrollToSection('how')">
+          <span>▶</span> See How It Works
+        </button>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num" data-target="12000">0</div>
+          <div class="stat-label">Students</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" data-target="3400">0</div>
+          <div class="stat-label">Skills Listed</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" data-target="8700">0</div>
+          <div class="stat-label">Swaps Done</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Floating Cards -->
+    <div class="hero-visual">
+      <div class="floating-cards">
+
+        <div class="fcard">
+          <div class="fcard-avatar">RK</div>
+          <div class="fcard-name">Rahul Kumar</div>
+          <div class="fcard-skill">Parul Vadodara · 2nd Year</div>
+          <div class="fcard-tags">
+            <span class="tag">React</span>
+            <span class="tag green">Guitar 🎸</span>
+          </div>
+        </div>
+
+        <div class="fcard">
+          <div class="fcard-avatar" style="background:linear-gradient(135deg,#ff6584,#ff9a9e)">DV</div>
+          <div class="fcard-name">Dax Vasani</div>
+          <div class="fcard-skill">Parul Goa · 3rd Year</div>
+          <div class="fcard-tags">
+            <span class="tag yellow">UI/UX Design</span>
+            <span class="tag pink">Photography</span>
+          </div>
+        </div>
+
+        <div class="fcard">
+          <div class="fcard-avatar" style="background:linear-gradient(135deg,#43e97b,#38f9d7)">MS</div>
+          <div class="fcard-name">Animesh Jha</div>
+          <div class="fcard-skill">IIT Bombay · Final Year</div>
+          <div class="fcard-tags">
+            <span class="tag">Python / ML</span>
+            <span class="tag green">Chess ♟️</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!--       HOW IT WORKS        -->
+
+  <section class="how" id="how">
+    <div class="section-label">Process</div>
+    <div class="section-title reveal">How SkillSwap Works</div>
+    <p class="section-sub reveal">Four simple steps to start learning and teaching among your college peers.</p>
+
+    <div class="steps-grid">
+      <div class="step-card reveal">
+        <div class="step-num">01</div>
+        <div class="step-icon icon-purple">📝</div>
+        <h3>Create Your Profile</h3>
+        <p>Sign up with your college email. Add skills you can teach and skills you want to learn.</p>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-num">02</div>
+        <div class="step-icon icon-pink">🔍</div>
+        <h3>Discover Peers</h3>
+        <p>Browse skill listings from students at your college. Filter by category, availability or rating.</p>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-num">03</div>
+        <div class="step-icon icon-green">🤝</div>
+        <h3>Propose a Swap</h3>
+        <p>Send a swap request — offer one of your skills in exchange for the skill you want to learn.</p>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-num">04</div>
+        <div class="step-icon icon-yellow">⭐</div>
+        <h3>Learn & Rate</h3>
+        <p>Meet up or connect online. Complete the swap and leave a review to build your reputation.</p>
+      </div>
+    </div>
+  </section>
+
+  <!--      BROWSE SKILLS     -->
+  <section id="skills" class="skills-section">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem">
+      <div>
+        <div class="section-label">Explore</div>
+        <div class="section-title reveal">Browse Available Skills</div>
+      </div>
+      <div class="search-bar">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="8"/>
+          <path d="m21 21-4.35-4.35"/>
+        </svg>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search skills..."
+          oninput="filterCards()"
+        />
+      </div>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="filter-tabs" id="filterTabs">
+      <button class="filter-tab active"  onclick="setFilter('All', this)">All</button>
+      <button class="filter-tab"         onclick="setFilter('Tech', this)">💻 Tech</button>
+      <button class="filter-tab"         onclick="setFilter('Design', this)">🎨 Design</button>
+      <button class="filter-tab"         onclick="setFilter('Music', this)">🎵 Music</button>
+      <button class="filter-tab"         onclick="setFilter('Language', this)">🌐 Language</button>
+      <button class="filter-tab"         onclick="setFilter('Academics', this)">📚 Academics</button>
+      <button class="filter-tab"         onclick="setFilter('Sports', this)">⚽ Sports</button>
+    </div>
+
+    <!-- Cards rendered by JS -->
+    <div class="skills-grid" id="skillsGrid"></div>
+  </section>
+
+  <!-- ═══════════════════════════════════
+       TESTIMONIALS
+  ═══════════════════════════════════ -->
+  <section class="testimonials" id="testimonials">
+    <div class="section-label">Stories</div>
+    <div class="section-title reveal">What Students Say</div>
+
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="quote">"</div>
+        <p class="testi-text">
+          I taught a junior React basics and in return learned Adobe Illustrator.
+          Best trade I ever made — saved me ₹8,000 on a design course!
+        </p>
+        <div class="testi-author">
+          <div class="avatar" style="background:linear-gradient(135deg,#6c63ff,#ff6584)">VK</div>
+          <div>
+            <div class="t-name">Vikram Kapoor</div>
+            <div class="t-college">Parul University · 3rd Year</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card reveal">
+        <div class="quote">"</div>
+        <p class="testi-text">
+          Found a guitar teacher in my hostel! She needed help with Data Structures
+          and I needed music. Perfect match through SkillSwap.
+        </p>
+        <div class="testi-author">
+          <div class="avatar" style="background:linear-gradient(135deg,#43e97b,#38f9d7)">SB</div>
+          <div>
+            <div class="t-name">Sneha Bhat</div>
+            <div class="t-college">NIT Pune · 2nd Year</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card reveal">
+        <div class="quote">"</div>
+        <p class="testi-text">
+          Swapped my video editing skills for German language lessons.
+          My DAAD application got stronger because of SkillSwap connections!
+        </p>
+        <div class="testi-author">
+          <div class="avatar" style="background:linear-gradient(135deg,#ffd166,#ef476f)">AR</div>
+          <div>
+            <div class="t-name">Aditya Rao</div>
+            <div class="t-college">IIT Bombay · Final Year</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════
+       CTA
+  ═══════════════════════════════════ -->
+  <section class="cta-section">
+    <div class="section-label">Join Today</div>
+    <div class="section-title">Ready to Swap Your First Skill?</div>
+    <p>
+      Join thousands of students already learning from each other.
+      It's free, it's fun, and it's the smartest way to grow in college.
+    </p>
+    <div class="cta-actions">
+      <button class="btn-primary btn-large" onclick="openModal('signup')">
+        Create Free Account
+      </button>
+      <button class="btn-outline btn-large" onclick="scrollToSection('skills')">
+        Browse Skills
+      </button>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════ -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo">SkillSwap</div>
+        <p>A peer-to-peer skill exchange platform built for college students across India.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Platform</h5>
+        <ul>
+          <li><a href="#">Browse Skills</a></li>
+          <li><a href="#">Post a Skill</a></li>
+          <li><a href="#">How It Works</a></li>
+          <li><a href="#">Success Stories</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press Kit</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Support</h5>
+        <ul>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Community</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2025-26 SkillSwap. Made with Parul University students.</span>
+      <div class="social-links">
+        <a class="social-btn" href="#" title="Twitter">𝕏</a>
+        <a class="social-btn" href="#" title="Instagram">📸</a>
+        <a class="social-btn" href="#" title="LinkedIn">in</a>
+        <a class="social-btn" href="#" title="Discord">💬</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════
+       AUTH MODAL
+  ═══════════════════════════════════ -->
+  <div class="modal-overlay" id="authModal" onclick="closeModalOutside(event)">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+
+      <!-- Tabs -->
+      <div class="tabs">
+        <button class="tab-btn" id="tabLogin"  onclick="switchTab('login')">Log In</button>
+        <button class="tab-btn" id="tabSignup" onclick="switchTab('signup')">Sign Up</button>
+      </div>
+
+      <!-- Login Form -->
+      <div id="formLogin">
+        <h2>Welcome back 👋</h2>
+        <p>Log in to your SkillSwap account.</p>
+        <div class="form-group">
+          <label>College Email</label>
+          <input type="email" placeholder="Enter your college mail id"/>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" placeholder="Enter your password"/>
+        </div>
+        <div class="modal-actions">
+          <button class="btn-primary btn-large" onclick="fakeLogin()">Log In</button>
+        </div>
+        <p style="text-align:center;margin-top:1rem;color:var(--muted);font-size:0.8rem">
+          Don't have an account?
+          <a href="#" style="color:var(--accent)" onclick="switchTab('signup')">Sign up free</a>
+        </p>
+      </div>
+
+      <!-- Signup Form -->
+      <div id="formSignup" style="display:none">
+        <h2>Join SkillSwap 🎓</h2>
+        <p>Create your free account and start swapping skills.</p>
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" placeholder="firstname"/>
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" placeholder="lastname"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>College Email</label>
+          <input type="email" placeholder="Enter your college mail id"/>
+        </div>
+        <div class="form-group">
+          <label>College / University</label>
+          <input type="text" placeholder="Enter your college name"/>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" placeholder="••••••••"/>
+        </div>
+        <div class="modal-actions">
+          <button class="btn-primary btn-large" onclick="fakeLogin()">Create Account</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">✅ Welcome to SkillSwap!</div>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+
+</body>
+</html>
