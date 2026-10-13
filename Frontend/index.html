@@ -13,9 +13,8 @@
 </head>
 <body>
 
-  <!-- ═══════════════════════════════════
-       NAVBAR
-  ═══════════════════════════════════ -->
+  <!--     NAVBAR     -->
+
   <nav>
     <div class="nav-logo">SkillSwap</div>
 
@@ -25,9 +24,17 @@
       <li><a href="#testimonials">Stories</a></li>
     </ul>
 
-    <div class="nav-cta">
+    <div class="nav-cta" id="navGuest">
       <button class="btn-ghost" onclick="openModal('login')">Log In</button>
       <button class="btn-primary" onclick="openModal('signup')">Get Started</button>
+    </div>
+
+    <div class="nav-cta" id="navUser" style="display:none">
+      <button class="btn-ghost bell-btn" onclick="openDashboard('notifications')">
+        🔔<span class="bell-badge" id="bellBadge" style="display:none">0</span>
+      </button>
+      <button class="btn-ghost" id="navUserName" onclick="openDashboard('profile')">Account</button>
+      <button class="btn-primary" onclick="logout()">Log Out</button>
     </div>
 
     <div class="hamburger" onclick="toggleMobileMenu()">
@@ -40,15 +47,17 @@
     <a href="#how"          onclick="toggleMobileMenu()">How It Works</a>
     <a href="#skills"       onclick="toggleMobileMenu()">Browse Skills</a>
     <a href="#testimonials" onclick="toggleMobileMenu()">Stories</a>
-    <div class="nav-cta">
+    <div class="nav-cta" id="navGuestMobile">
       <button class="btn-ghost"    onclick="openModal('login')">Log In</button>
       <button class="btn-primary"  onclick="openModal('signup')">Get Started</button>
     </div>
+    <div class="nav-cta" id="navUserMobile" style="display:none">
+      <button class="btn-ghost" onclick="openDashboard('profile')">Account</button>
+      <button class="btn-primary" onclick="logout()">Log Out</button>
+    </div>
   </div>
 
-  <!-- ═══════════════════════════════════
-       HERO
-  ═══════════════════════════════════ -->
+  <!--       HERO       -->
   <section class="hero">
     <div class="hero-glow glow-1"></div>
     <div class="hero-glow glow-2"></div>
@@ -117,7 +126,7 @@
 
         <div class="fcard">
           <div class="fcard-avatar" style="background:linear-gradient(135deg,#43e97b,#38f9d7)">MS</div>
-          <div class="fcard-name">Manthan Soni</div>
+          <div class="fcard-name">Animesh Jha</div>
           <div class="fcard-skill">IIT Bombay · Final Year</div>
           <div class="fcard-tags">
             <span class="tag">Python / ML</span>
@@ -129,9 +138,8 @@
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════
-       HOW IT WORKS
-  ═══════════════════════════════════ -->
+  <!--       HOW IT WORKS        -->
+
   <section class="how" id="how">
     <div class="section-label">Process</div>
     <div class="section-title reveal">How SkillSwap Works</div>
@@ -165,9 +173,7 @@
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════
-       BROWSE SKILLS
-  ═══════════════════════════════════ -->
+  <!--      BROWSE SKILLS     -->
   <section id="skills" class="skills-section">
     <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem">
       <div>
@@ -346,14 +352,14 @@
         <p>Log in to your SkillSwap account.</p>
         <div class="form-group">
           <label>College Email</label>
-          <input type="email" placeholder="Enter your college mail id"/>
+          <input type="email" id="loginEmail" placeholder="Enter your college mail id"/>
         </div>
         <div class="form-group">
           <label>Password</label>
-          <input type="password" placeholder="Enter your password"/>
+          <input type="password" id="loginPassword" placeholder="Enter your password"/>
         </div>
         <div class="modal-actions">
-          <button class="btn-primary btn-large" onclick="fakeLogin()">Log In</button>
+          <button class="btn-primary btn-large" onclick="handleLogin()">Log In</button>
         </div>
         <p style="text-align:center;margin-top:1rem;color:var(--muted);font-size:0.8rem">
           Don't have an account?
@@ -368,30 +374,256 @@
         <div class="form-row">
           <div class="form-group">
             <label>First Name</label>
-            <input type="text" placeholder="firstname"/>
+            <input type="text" id="signupFirstName" placeholder="firstname"/>
           </div>
           <div class="form-group">
             <label>Last Name</label>
-            <input type="text" placeholder="lastname"/>
+            <input type="text" id="signupLastName" placeholder="lastname"/>
           </div>
         </div>
         <div class="form-group">
           <label>College Email</label>
-          <input type="email" placeholder="Enter your college mail id"/>
+          <input type="email" id="signupEmail" placeholder="Enter your college mail id"/>
         </div>
         <div class="form-group">
           <label>College / University</label>
-          <input type="text" placeholder="Enter your college name"/>
+          <input type="text" id="signupCollege" placeholder="Enter your college name"/>
+        </div>
+        <div class="form-group">
+          <label>Year</label>
+          <select id="signupYear">
+            <option>1st Year</option>
+            <option>2nd Year</option>
+            <option>3rd Year</option>
+            <option>Final Year</option>
+          </select>
         </div>
         <div class="form-group">
           <label>Password</label>
-          <input type="password" placeholder="••••••••"/>
+          <input type="password" id="signupPassword" placeholder="••••••••"/>
         </div>
         <div class="modal-actions">
-          <button class="btn-primary btn-large" onclick="fakeLogin()">Create Account</button>
+          <button class="btn-primary btn-large" onclick="handleSignup()">Create Account</button>
         </div>
       </div>
 
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════
+       DASHBOARD MODAL (Profile / My Skills / Swaps / Bookings / Notifications)
+  ═══════════════════════════════════ -->
+  <div class="modal-overlay" id="dashboardModal" onclick="closeDashboardOutside(event)">
+    <div class="modal modal-wide">
+      <button class="modal-close" onclick="closeDashboard()">✕</button>
+
+      <div class="tabs" id="dashboardTabs">
+        <button class="tab-btn" id="dtabProfile"       onclick="switchDashboardTab('profile')">Profile</button>
+        <button class="tab-btn" id="dtabMySkills"      onclick="switchDashboardTab('myskills')">My Skills</button>
+        <button class="tab-btn" id="dtabSwaps"         onclick="switchDashboardTab('swaps')">Swaps</button>
+        <button class="tab-btn" id="dtabBookings"      onclick="switchDashboardTab('bookings')">Bookings</button>
+        <button class="tab-btn" id="dtabNotifications" onclick="switchDashboardTab('notifications')">Notifications</button>
+      </div>
+
+      <!-- Profile Tab -->
+      <div id="dpaneProfile" class="dash-pane">
+        <h2>My Profile</h2>
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" id="profileFirstName"/>
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" id="profileLastName"/>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>College</label>
+            <input type="text" id="profileCollege"/>
+          </div>
+          <div class="form-group">
+            <label>Year</label>
+            <select id="profileYear">
+              <option>1st Year</option>
+              <option>2nd Year</option>
+              <option>3rd Year</option>
+              <option>Final Year</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Bio</label>
+          <textarea id="profileBio" placeholder="Tell peers a bit about yourself"></textarea>
+        </div>
+        <div class="modal-actions">
+          <button class="btn-primary btn-large" onclick="saveProfile()">Save Changes</button>
+        </div>
+      </div>
+
+      <!-- My Skills Tab -->
+      <div id="dpaneMySkills" class="dash-pane" style="display:none">
+        <div class="dash-pane-header">
+          <h2 style="margin:0">My Skills</h2>
+          <button class="btn-primary" onclick="openPostSkillModal()">+ Post a Skill</button>
+        </div>
+        <div id="mySkillsList" class="dash-list"></div>
+      </div>
+
+      <!-- Swaps Tab -->
+      <div id="dpaneSwaps" class="dash-pane" style="display:none">
+        <h2>Swap Requests</h2>
+        <div class="tabs" style="margin-bottom:1rem">
+          <button class="tab-btn active" id="swapSubReceived" onclick="switchSwapSubTab('received')">Received</button>
+          <button class="tab-btn" id="swapSubSent" onclick="switchSwapSubTab('sent')">Sent</button>
+        </div>
+        <div id="swapsList" class="dash-list"></div>
+      </div>
+
+      <!-- Bookings Tab -->
+      <div id="dpaneBookings" class="dash-pane" style="display:none">
+        <h2>My Bookings</h2>
+        <div id="bookingsList" class="dash-list"></div>
+      </div>
+
+      <!-- Notifications Tab -->
+      <div id="dpaneNotifications" class="dash-pane" style="display:none">
+        <div class="dash-pane-header">
+          <h2 style="margin:0">Notifications</h2>
+          <button class="btn-ghost" onclick="markAllNotificationsRead()">Mark all read</button>
+        </div>
+        <div id="notificationsList" class="dash-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════
+       POST A SKILL MODAL
+  ═══════════════════════════════════ -->
+  <div class="modal-overlay" id="postSkillModal" onclick="closeModalById('postSkillModal', event)">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('postSkillModal')">✕</button>
+      <h2>Post a Skill</h2>
+      <p>Share something you can teach your college peers.</p>
+      <div class="form-group">
+        <label>Skill Name</label>
+        <input type="text" id="postSkillName" placeholder="e.g. React & Next.js"/>
+      </div>
+      <div class="form-group">
+        <label>Category</label>
+        <select id="postSkillCategory">
+          <option>Tech</option>
+          <option>Design</option>
+          <option>Music</option>
+          <option>Language</option>
+          <option>Academics</option>
+          <option>Sports</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Description</label>
+        <textarea id="postSkillDescription" placeholder="What can you teach? What's your experience?"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Tags (comma separated)</label>
+        <input type="text" id="postSkillTags" placeholder="e.g. React, Next.js"/>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-primary btn-large" onclick="submitPostSkill()">Post Skill</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════
+       SWAP REQUEST MODAL
+  ═══════════════════════════════════ -->
+  <div class="modal-overlay" id="swapRequestModal" onclick="closeModalById('swapRequestModal', event)">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('swapRequestModal')">✕</button>
+      <h2 id="swapModalTitle">Request a Swap</h2>
+      <p>Propose a skill exchange with this student.</p>
+      <div class="form-group">
+        <label>Skill I Can Offer</label>
+        <input type="text" id="swapOfferedSkill" placeholder="e.g. UI/UX Design"/>
+      </div>
+      <div class="form-group">
+        <label>Skill I Want To Learn</label>
+        <input type="text" id="swapRequestedSkill" placeholder="e.g. React & Next.js"/>
+      </div>
+      <div class="form-group">
+        <label>Message (optional)</label>
+        <textarea id="swapMessage" placeholder="Say hi and explain what you're looking for"></textarea>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-primary btn-large" onclick="submitSwapRequest()">Send Request</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════
+       BOOKING MODAL
+  ═══════════════════════════════════ -->
+  <div class="modal-overlay" id="bookingModal" onclick="closeModalById('bookingModal', event)">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('bookingModal')">✕</button>
+      <h2>Schedule a Session</h2>
+      <p>Pick a date and time for this swap.</p>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Date</label>
+          <input type="date" id="bookingDate"/>
+        </div>
+        <div class="form-group">
+          <label>Mode</label>
+          <select id="bookingMode">
+            <option value="online">Online</option>
+            <option value="offline">Offline</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Start Time</label>
+          <input type="time" id="bookingStartTime"/>
+        </div>
+        <div class="form-group">
+          <label>End Time</label>
+          <input type="time" id="bookingEndTime"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Notes (optional)</label>
+        <textarea id="bookingNotes" placeholder="e.g. React hooks session"></textarea>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-primary btn-large" onclick="submitBooking()">Confirm Booking</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════
+       REVIEW MODAL
+  ═══════════════════════════════════ -->
+  <div class="modal-overlay" id="reviewModal" onclick="closeModalById('reviewModal', event)">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('reviewModal')">✕</button>
+      <h2>Leave a Review</h2>
+      <p>How was your session?</p>
+      <div class="form-group">
+        <label>Rating</label>
+        <div class="star-input" id="starInput">
+          <span data-star="1">★</span><span data-star="2">★</span><span data-star="3">★</span><span data-star="4">★</span><span data-star="5">★</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Comment</label>
+        <textarea id="reviewComment" placeholder="Share your experience"></textarea>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-primary btn-large" onclick="submitReview()">Submit Review</button>
+      </div>
     </div>
   </div>
 
